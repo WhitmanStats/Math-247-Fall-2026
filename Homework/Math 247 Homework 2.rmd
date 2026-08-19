@@ -1,0 +1,55 @@
+---
+title: "Math 247: Homework 2"
+author: "Your name here "
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
+library(ISIwithR)
+library(mosaic)
+#library(readr)
+```
+
+
+## Love, first
+
+A study (Ackerman, Griskevicius, and Li, 2011) examined expressions of commitment between two partners in a committed romantic relationship. One aspect of the study involved 47 heterosexual couples who are part of an online pool of people willing to participate in surveys. These 47 couples were asked about which person was the first to say “I love you.” For 7 of those couples, the two people disagreed about the answer to this question. But both people agreed for the other 40 couples, so those 40 responses were included in the analysis. Previous studies have suggested that males tend to say “I love you” first.
+
+> a. Identify the observational units and variable in this study. Also classify the variable as categorical or quantitative.
+
+> b. Describe (in words) the parameter of interest. What is the appropriate notation for this parameter?
+
+> c. State the appropriate null and alternative hypotheses (in words) for testing whether males are more likely to say “I love you” first.
+
+> d. Express these hypotheses with symbols
+
+> e. It turned out that for 28 of the 40 couples in the sample (after the 7 couples who could not agree were excluded), the man said “I love you” before the woman did. Create a barplot of this data in R.
+
+
+```{r}
+#copy/paste /tweak code from exploration 1.1
+```
+
+
+> f. Determine the sample proportion (written as a decimal) of couples for whom the man was the first to say “I love you.” What symbol do we use to denote this proportion?
+
+> g. Use R to create a null distribution to assess the strength of evidence against the null hypothesis provided by the sample data. What does a single dot in the null distribution represent?
+
+```{r}
+#copy/paste /tweak code from exploration 1.2
+```
+
+
+> h. Obtain p-value using appropriate R code. Write a sentence or two interpreting this p-value: the probability of ____ or ____ , assuming that _____.
+
+```{r}
+#copy/paste /tweak code from exploration 1.2
+```
+
+> i. Summarize your conclusion from this p-value.
+

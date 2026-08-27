@@ -1,0 +1,150 @@
+---
+title: "Math 247: Exploration - Preliminaries 1.1-1.3"
+author: "Your name here "
+header-includes:
+  - \usepackage{float}
+  - \floatplacement{figure}{H}
+output:
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE,message=FALSE,warning=FALSE, fig.align = 'center', out.width="80%" )
+```
+
+## Instructions
+
+This activity must be produced with an RMarkdown document. Make sure to include your name.
+
+## Notetaking
+
+Student researchers at Hope College conducted an experiment to determine whether there is a difference in memorization ability of students when they take notes on paper using handwriting versus taking notes on a computer. They randomly assigned 20 students to the paper-based notetaking group and 20 students to the computer-based notetaking group. They showed all their subjects a 12-minute video about the sun, asking students to take notes using the method assigned. After the video was over, the notes were collected and the students were given a 10-question quiz on information about the sun given in the video, with the instructor recording the number correct out of 10.
+
+> a.  In this study, what are the observational units?
+
+
+
+> b.  What are the variables in this study?
+
+
+
+> c.  Are the variables categorical or quantitative?
+
+## Hand washing
+
+In August of 2005, researchers for the American Society for Microbiology and the Soap and Detergent Association monitored the behavior of more than 6,300 users of public restrooms. They observed people in public venues such as Turner Field in Atlanta and Grand Central Station in New York City. For each person they kept track of the person’s sex and whether or not the person washed his or her hands along with the person’s location.
+
+> a.  Identify the observational units in this study.
+
+> b.  Identify the three variables that were recorded on each observational units.
+
+*Consider the following two graphs produced from the resulting data:* Do not worry about not understanding the code at this point. Your task will be to describe the output.
+
+This code was generated with the help of ChatGPT.[^1]
+
+[^1]: ChatGPT (OpenAI). "Assistance with R code generation." 2025.
+
+The first four rows of the simulated data contain the following inputs:
+
+```{r, simulate the data, echo=FALSE}
+# Load necessary library
+library(ggplot2)
+
+# Set seed for reproducibility
+set.seed(896)
+
+# Create the dataset
+
+n_per_city <- 1575
+
+cities <- rep(c("Atlanta", "Chicago", "New York", "San Francisco"), each = n_per_city)
+sexes <- sample(c("Men", "Women"), size = length(cities), replace = TRUE)
+
+# Define probabilities for handwashing by city and sex
+# For demonstration, let's assume women wash more frequently
+probability_matrix <- matrix(
+  c(
+    # Men     Women
+    0.60,   0.85,   # Atlanta
+    0.45,   0.80,   # Chicago
+    0.75,   0.90,   # New York
+    0.70,   0.85    # San Francisco
+  ),
+  nrow = 4,
+  byrow = TRUE,
+  dimnames = list(c("Atlanta", "Chicago", "New York", "San Francisco"),
+                  c("Men", "Women"))
+)
+
+# Generate handwashing status
+WashedHands <- character(length = length(cities))
+for (i in seq_along(cities)){
+  city <- cities[i]
+  sex <- sexes[i]
+  prob <- probability_matrix[city, sex]
+  WashedHands[i] <- sample(c("Yes", "No"), size = 1, prob = c(prob, 1 - prob))
+}
+
+# Factor levels for correct stacking order: "Yes" at the bottom
+data <- data.frame(
+  Sex = sexes,
+  Location = cities,
+  WashedHands = factor(WashedHands, levels = c("Yes", "No"))
+)
+
+# Print the first four rows of the simulated data
+head(data,2)
+```
+
+> c.  For the graph comparing men and women, state a research question that can be addressed with the graph. Then answer the question based on the graph.
+
+```{r, the first plot- part c, echo=FALSE}
+# Plot by sex
+ggplot(data, aes(x = Sex, fill = WashedHands)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c("darkseagreen", "lightgray"),
+                    labels = c("Washed hands", "Did not wash hands")) +
+  labs(y = "Percentage", fill = "") +
+  theme_minimal()
+```
+
+
+
+
+> d.  Repeat part (c) for the graph comparing different locations of public restrooms.
+
+```{r, the second plot - part d, echo=FALSE}
+# Plot by location
+ggplot(data, aes(x = Location, fill = WashedHands)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c("darkseagreen", "lightgray"),
+                    labels = c("Washed hands", "Did not wash hands")) +
+  labs(y = "Percentage", fill = "") +
+  theme_minimal()
+```
+
+## Random Process
+
+If a random process is repeated under identical conditions then. **Bold** your response below.
+
+> A. Outcomes for any single instance as well as the proportion of times a particular outcome occurs in the long run can be predicted.
+
+> B. Outcomes for any single instance as well as the proportion of times a particular outcome occurs in the long run cannot be predicted.
+
+> C. Outcomes for any single instance cannot be predicted, but the proportion of times a particular outcome occurs in the long run can be predicted.
+
+> D. Outcomes for any single instance can be predicted, but the proportion of times a particular outcome occurs in the long run cannot be predicted.
+
+## Simulations to estimate probability
+
+We can use simulations to estimate a probability. In doing so, it is best to carry out the simulation...**Bold** your response below.
+
+> A. A small number of times.
+
+> B. A large number of times.
+
+> C. Any number of times, it doesn't matter because the simulation is the same each time.
+
+> D. A small number of times if the probability is small and a large number of times if the probability is large.
